@@ -5,13 +5,24 @@
     <title>Creating My Project</title>
     <link rel="stylesheet" href="My-Project.css" />
     <style>
+        .checkbox {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
         .checkbox div {
             display: flex;
             align-items: center;
+            margin-right: 20px;
         }
 
         .checkbox input {
             margin-right: 8px;
+        }
+
+        .text-checkbox {
+            font-size: 16px; 
         }
     </style>
 </head>
@@ -26,7 +37,7 @@
                 <li class="nav-link">
                     <a href="index.html">Home</a>
                 </li>
-                <li class="nav-link Blog">
+                <li class="nav-link Blog" style="width: 200px;">
                     <a href="My-Project.html">
                         My Project
                     </a>
@@ -44,7 +55,7 @@
                 <form onsubmit="submitBlog(event)">
                     <h1>ADD MY PROJECT</h1>
                     <div>
-                        <label for="inputTitle">Title</label>
+                        <label for="inputTitle">Project Name</label>
                         <input type="text" id="inputTitle" />
                     </div>
                     <div style="display: flex; gap: 20px;">
@@ -62,25 +73,22 @@
                         <textarea id="inputContent"></textarea>
                     </div>
                     <label>Technologies</label>
-                    <div class="checkbox">
+                    <div class="checkbox" style="margin-top: 10px;">
                         <div>
                             <input type="checkbox" id="inputNodejs" />
                             <label class="text-checkbox">Node Js</label>
-                        </div>
-                        <div>
                             <input type="checkbox" id="inputNextJs" />
                             <label class="text-checkbox">Next Js</label>
                         </div>
+                        <br>
                         <div>
                             <input type="checkbox" id="inputReactjs" />
                             <label class="text-checkbox">React Js</label>
-                        </div>
-                        <div>
                             <input type="checkbox" id="inputTypescript" />
                             <label class="text-checkbox">TypeScript</label>
                         </div>
+                     <br>
                     </div>
-                    <br>
                     <div>
                         <label for="inputImage">Choose Image</label>
                         <div class="input-Blog-image-group">

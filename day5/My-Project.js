@@ -64,7 +64,7 @@ function submitBlog(event) {
         content: inputContent,
         image: inputImage,
         postAt: new Date(),
-        author: "Surya Elidanto",
+        author: "Ravano Akbar Widodo",
         nodeJs: true,
         reactJs: true,
         nextJs: false,

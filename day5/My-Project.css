@@ -7,9 +7,8 @@
     padding: 0;
 }
 
-/* Navbar */
 .btn-contact {
-    background-color: orangered;
+    background-color: gray;
     color: white;
     padding: 10px;
     width: 130px;
@@ -103,7 +102,7 @@ select {
     margin-top: 50px;
     padding: 8px 20px;
     font-size: 17px;
-    background: #ec4d37;
+    background: gray;
     border-radius: 8px;
     border: none;
     color: #fff;
@@ -166,7 +165,7 @@ select {
     padding: 5px 10px;
     border: 0;
     border-radius: 4px;
-    background: #ec4d37;
+    background: gray;
     color: #fff;
 }
 

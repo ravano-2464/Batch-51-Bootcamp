@@ -1,10 +1,12 @@
 let angka = 5;
+
 for (let i = 1; i <= angka; i++) {
     console.log(i);
 }
 
 let condition = true;
 let counter = 1;
+
 while (condition) {
     console.log(counter);
     if (counter === 5) {
@@ -14,6 +16,7 @@ while (condition) {
 }
 
 let number = 1;
+
 do {
     console.log(number);
     number++;
@@ -21,35 +24,39 @@ do {
 
 let dataBlog = [];
 
-function submitBlog(event) {
+function submitData(event) {
     event.preventDefault();
 
-    let inputTitle = document.getElementById("inputTitle").value;
-    let inputContent = document.getElementById("inputContent").value;
-    let inputImage = document.getElementById("inputImage").files;
+    const inputTitle = getInputValue("inputTitle");
+    const inputContent = getInputValue("inputContent");
+    const inputImage = document.getElementById("inputImage").files;
 
     console.log("title", inputTitle);
     console.log("content", inputContent);
 
-    inputImage = URL.createObjectURL(inputImage[0]);
-    console.log("image", inputImage);
+    const inputImageUrl = URL.createObjectURL(inputImage[0]);
+    console.log("image", inputImageUrl);
 
-    const Blog = {
+    const blog = {
         title: inputTitle,
         content: inputContent,
-        image: inputImage,
+        image: inputImageUrl,
         postAt: "09 November 2023",
         author: "Ravano Akbar Widodo",
     };
 
-    dataBlog.push(Blog);
+    dataBlog.push(blog);
     console.log("dataBlog", dataBlog);
     renderBlog();
 }
 
+function getInputValue(inputId) {
+    return document.getElementById(inputId).value;
+}
+
 function renderBlog() {
     const container = document.getElementById("contents");
-    container.innerHTML = ""; 
+    container.innerHTML = "";
 
     for (const blog of dataBlog) {
         container.innerHTML += `

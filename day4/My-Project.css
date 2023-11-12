@@ -5,7 +5,21 @@
     padding: 0;
 }
 
-/* Navbar */
+.checkbox {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.checkbox input {
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.text-checkbox {
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
 .btn-contact {
     background-color: gray;
     color: white;

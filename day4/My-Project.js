@@ -25,7 +25,6 @@ do {
 let dataBlog = [];
 
 function submitData(event) {
-    event.preventDefault();
 
     const inputTitle = getInputValue("inputTitle");
     const inputContent = getInputValue("inputContent");
@@ -80,5 +79,5 @@ function renderBlog() {
                 </p>
             </div>
         </div>`;
-    }
+    }    
 }

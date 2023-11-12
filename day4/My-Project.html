@@ -3,16 +3,42 @@
 
 <head>
     <title>Creating My Project</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="My-Project.css" />
+    
     <style>
+        .text-checkbox {
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+        }
+
         .checkbox div {
-            display: flex;
-            align-items: center;
+          display: flex;
+          align-items: center;
+          margin-bottom: 8px; 
         }
 
         .checkbox input {
-            margin-right: 8px;
+         margin-right: 8px;
         }
+
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .button-group {
+            text-align: center;
+        }
+
     </style>
 </head>
 
@@ -62,7 +88,8 @@
                         <textarea id="inputContent"></textarea>
                     </div>
                     <label>Technologies</label>
-                    <div class="checkbox">
+                    <div class="checkbox" text-align>
+                        <br>
                         <div>
                             <input type="checkbox" id="inputNodejs" />
                             <label class="text-checkbox">Node Js</label>
@@ -91,9 +118,7 @@
                             <input type="file" id="inputImage" hidden />
                         </div>
                     </div>
-                    <div class="button-group">
-                        <input type="button" value="Submit" class="btn-submit" onclick="submitData()" />
-                    </div>                    
+                    <input type="submit" value="Submit" class="submit-contact" onclick="submitData()" />                   
                 </form>
             </div>
         </div>

@@ -63,7 +63,7 @@ function renderBlog() {
                     <button class="btn-post">Delete Post</button>
                 </div>
                 <h1>
-                    <a href="Blog-detail.html" target="_blank">${blog.title}</a>
+                    <a href="My-Project-Detail.html" target="_blank">${blog.title}</a>
                 </h1>
                 <div class="detail-Blog-content">
                     ${blog.postAt} | ${blog.author}

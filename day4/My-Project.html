@@ -4,10 +4,19 @@
 <head>
     <title>Creating My Project</title>
     <link rel="stylesheet" href="My-Project.css" />
+    <style>
+        .checkbox div {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox input {
+            margin-right: 8px;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- NavBar -->
     <nav style="background-color: #f4f3f3; height: 75px;">
         <div style="display: flex; align-items: center; height: 100%; margin-left: 30px; margin-right: 30px;">
             <ul style="display: flex; list-style-type: none; gap: 50px; align-items: center;">
@@ -17,8 +26,10 @@
                 <li class="nav-link">
                     <a href="index.html">Home</a>
                 </li>
-                <li class="nav-link">
-                    <a href="My-Project.html">My Project</a>
+                <li class="nav-link Blog">
+                    <a href="My-Project.html">
+                        My Project
+                    </a>
                 </li>
             </ul>
             <div style="display: flex; width: 100%; justify-content: end;">
@@ -36,10 +47,6 @@
                         <label for="inputTitle">Title</label>
                         <input type="text" id="inputTitle" />
                     </div>
-                    <div>
-                        <label for="inputContent">Description</label>
-                        <textarea id="inputContent"></textarea>
-                    </div>
                     <div style="display: flex; gap: 20px;">
                         <div>
                             <label for="startDate">Start Date</label>
@@ -49,18 +56,31 @@
                             <label for="endDate">End Date</label>
                             <input type="date" id="endDate" />
                         </div>
-                    </div>                    
+                    </div>
+                    <div>
+                        <label for="inputContent">Description</label>
+                        <textarea id="inputContent"></textarea>
+                    </div>
                     <label>Technologies</label>
                     <div class="checkbox">
-                        <input type="checkbox" id="inputNodejs" />
-                        <label class="text-checkbox">Node Js</label>
-                        <input type="checkbox" id="inputNextJs" />
-                        <label class="text-checkbox">Next Js</label>
-                        <input type="checkbox" id="inputReactjs" />
-                        <label class="text-checkbox">React Js</label>
-                        <input type="checkbox" id="inputTypescript" />
-                        <label class="text-checkbox">TypeScript</label>
+                        <div>
+                            <input type="checkbox" id="inputNodejs" />
+                            <label class="text-checkbox">Node Js</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="inputNextJs" />
+                            <label class="text-checkbox">Next Js</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="inputReactjs" />
+                            <label class="text-checkbox">React Js</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="inputTypescript" />
+                            <label class="text-checkbox">TypeScript</label>
+                        </div>
                     </div>
+                    <br>
                     <div>
                         <label for="inputImage">Choose Image</label>
                         <div class="input-Blog-image-group">
@@ -79,7 +99,11 @@
         </div>
 
         <hr class="line" />
-        <div id="contents" class="Blog-list">
+
+        <div>
+            <h2>My Projects</h2>
+            <div id="contents" class="Blog-list">
+            </div>
         </div>
     </div>
     <script src="My-Project.js"></script>

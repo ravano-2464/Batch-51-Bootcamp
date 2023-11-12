@@ -1,83 +1,154 @@
-let angka = 5;
+const data = [];
 
-for (let i = 1; i <= angka; i++) {
-    console.log(i);
+function submitBlog(event) {
+  event.preventDefault();
+
+  const title = document.getElementById("pName").value
+  const s_date = document.getElementById("s-date").value
+  const e_date = document.getElementById("e-date").value
+  const content = document.getElementById("description").value
+  const isUsingNodeJs = document.getElementById("tech1").checked
+  const isUsingReactJs = document.getElementById("tech2").checked
+  const isUsingNextJs = document.getElementById("tech3").checked
+  const isUsingTypescript = document.getElementById("tech4").checked
+  let image = document.getElementById("attachFile").files
+  const p_duration = durationInDays(s_date, e_date)
+
+  
+  // Validation
+  if (title === "") {
+    alert("Project name must be filled");
+    return;
+  }
+  if (s_date === "") {
+    alert("Start date must be filled");
+    return;
+  }
+  if (e_date === "") {
+    alert("End date must be filled");
+    return;
+  }
+  if (content === "") {
+    alert("Description must be filled");
+    return;
+  } 
+  if (image.length === 0) {
+    alert("Must upload a picture");
+    return;
+  }
+  if (p_duration <= 0) {
+    alert("Start date cannot less than end date")
+    return;
+  }
+
+  
+  //display image
+  image = URL.createObjectURL(image[0])
+
+  //display duration
+  const duration = durationInMonth(p_duration)
+
+  const obj = {
+    title,
+    s_date,
+    e_date,
+    duration,
+    image,
+    content,
+    isUsingNodeJs,
+    isUsingReactJs,
+    isUsingNextJs,
+    isUsingTypescript,
+  }
+
+  data.push(obj)
+  renderProject()
+
 }
 
-let condition = true;
-let counter = 1;
+function renderProject() {
+  document.getElementById("project-li").innerHTML = ""
+  for (let i = 0; i < data.length; i++) {
 
-while (condition) {
-    console.log(counter);
-    if (counter === 5) {
-        condition = false;
-    }
-    counter++;
-}
-
-let number = 1;
-
-do {
-    console.log(number);
-    number++;
-} while (number <= 5);
-
-let dataBlog = [];
-
-function submitData(event) {
-
-    const inputTitle = getInputValue("inputTitle");
-    const inputContent = getInputValue("inputContent");
-    const inputImage = document.getElementById("inputImage").files;
-
-    console.log("title", inputTitle);
-    console.log("content", inputContent);
-
-    const inputImageUrl = URL.createObjectURL(inputImage[0]);
-    console.log("image", inputImageUrl);
-
-    const blog = {
-        title: inputTitle,
-        content: inputContent,
-        image: inputImageUrl,
-        postAt: "09 November 2023",
-        author: "Ravano Akbar Widodo",
-    };
-
-    dataBlog.push(blog);
-    console.log("dataBlog", dataBlog);
-    renderBlog();
-}
-
-function getInputValue(inputId) {
-    return document.getElementById(inputId).value;
-}
-
-function renderBlog() {
-    const container = document.getElementById("contents");
-    container.innerHTML = "";
-
-    for (const blog of dataBlog) {
-        container.innerHTML += `
-        <div class="Blog-list-item">
-            <div class="Blog-image">
-                <img src="${blog.image}" alt="" />
-            </div>
-            <div class="Blog-content">
-                <div class="btn-group">
-                    <button class="btn-edit">Edit Post</button>
-                    <button class="btn-post">Delete Post</button>
+    // post content
+    document.getElementById("project-li").innerHTML += `
+        <div class="project-container" id="project-item">
+                <a href="./project-details.html">
+                <div class="project-image">
+                    <img src="${data[i].image}">
                 </div>
-                <h1>
-                    <a href="My-Project-Detail.html" target="_blank">${blog.title}</a>
-                </h1>
-                <div class="detail-Blog-content">
-                    ${blog.postAt} | ${blog.author}
+                <p style="font-weight: bold;">${data[i].title}</p>
+                <p style="font-size: 15px; color: gray;">Duration : ${data[i].duration}</p>
+
+                <div class="project-content">
+                    <p>
+                        ${data[i].content}
+                    </p>
                 </div>
-                <p>
-                    ${blog.content}
-                </p>
-            </div>
-        </div>`;
-    }    
+
+               <div class="project-icon">                                           
+                    <ul>
+                        ${renderTechImages(data[i])}
+                    </ul>
+                </div>
+                <div class="project-button">
+                    <button class="edit" type="button">Edit</button>
+                    <button class="delete" type="button">Delete</button>
+                </div>
+                </a>
+            </div>`
+  }
+}
+
+//render tech images
+function renderTechImages(Object) {
+  let renderImages = "";
+
+  if (Object.isUsingNodeJs) {
+      renderImages += `<li><img src="./assets/images/nodejs.png" alt="node-js"></li>`;
+  }
+  if (Object.isUsingReactJs) {
+      renderImages += `<li><img src="./assets/images/reactjs.png" alt="node-js"></li>`;
+  }
+  if (Object.isUsingNextJs) {
+      renderImages += `<li><img src="./assets/images/nextjs.png" alt="next-js"></li>`;
+  }
+  if (Object.isUsingTypescript) {
+      renderImages += `<li><img src="./assets/images/typescript.png" alt="typescript"></li>`;
+  }
+
+  return renderImages;
+}
+
+// add duration in days
+function durationInDays(s_date, e_date) {
+  // 1000 msec, 60 sec, 60 minutes, 24 hours
+  const oneDay = 1000*60*60*24;
+
+  const s_dateMs = new Date(s_date).getTime();
+  const e_dateMs = new Date(e_date).getTime();
+  const durationMs = e_dateMs - s_dateMs;
+
+  // add 1 day if start & end is same day
+  return Math.floor(durationMs/oneDay);
+}
+
+// add duration in month
+function durationInMonth(days) {
+  monthDuration = Math.floor(days/30);
+  daysDuration = days%30;
+
+  // if less than a month return to days
+  if (monthDuration == 0) {
+    return `${daysDuration} Days`;
+  }
+
+  if (daysDuration > 20) {
+    monthDuration ++;
+  }
+  else if (daysDuration <= 20 && daysDuration > 10) {
+    monthDuration += 0.5;
+  }
+
+  return `${monthDuration} Months`
 }

@@ -1,15 +1,3 @@
-// LOOPING : FOR, WHILE, DO-WHILE
-
-// FOR -> perulangan yang kamu sudah tau kapan harus berhenti
-// for(let index = 0; index < 10; index++) { 
-//     console.log("ini adalah index", index)
-// }
-
-// WHILE -> perulangan yang belum tentu kamu tau kapan harus berhenti (berdasarkan data dinamis)
-
-// DO WHILE -> perulangan yang jalan dulu sekali, baru dicek
-
-
 function getFullTime(tanggal) {
     const monthList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
@@ -31,16 +19,10 @@ function getFullTime(tanggal) {
 }
 
 function getDistanceTime(time) {
-    const timeNow = new Date().getTime() // jam sekarang miliseconds
+    const timeNow = new Date().getTime() 
     const timePosted = time 
 
-    const distance = timeNow - timePosted // miliseconds
-
-    // Math :
-    // floor -> dibulatkan ke bawah, ex : 8.6 -> 8
-    // round -> dibulatkan angka terdekat, ex : 8.3 -> 8
-    // ceil -> dibulatkan ke atas, ex : 8.3 -> 9
-
+    const distance = timeNow - timePosted 
     const distanceSeconds = Math.floor(distance / 1000)
     const distanceMinutes = Math.floor(distance / 1000 / 60)
     const distanceHours = Math.floor(distance / 1000 / 60 / 60)
@@ -93,38 +75,6 @@ function submitBlog(event) {
     console.log("dataBlog", dataBlog)
     renderBlog()
 }
-
-// function showMeHelloWorld() {
-//     const container = document.getElementById("contents")
-//     container.innerHTML = '<p>Hello World</p>'
-// }
-
-// dataBlog = [
-//  {
-//     title: "title 1",
-//     content: "content 1"
-//  },
-//  {
-//     title: "title 1",
-//     content: "content 1"
-//  },
-//  {
-//     title: "title 2",
-//     content: "content 2"
-//  },
-//  {
-//     title: "title 1",
-//     content: "content 1"
-//  },
-//  {
-//     title: "title 2",
-//     content: "content 2"
-//  },
-//  {
-//     title: "title 3",
-//     content: "content 3"
-//  },
-// ]
 
 function renderBlog() {
     document.getElementById("contents").innerHTML = ''

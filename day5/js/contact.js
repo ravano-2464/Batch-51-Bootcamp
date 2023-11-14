@@ -16,7 +16,7 @@ function submitData() {
     } else if (inputMessage === "") {
         alert('Message must be filled out');
     } else {
-        
+       
         console.log(`Name: ${inputName}\nEmail: ${inputEmail}\nPhone: ${inputPhone}\nSubject: ${inputSubject}\nMessage: ${inputMessage}`);
 
         const mailtoLink = `mailto:ravanoganteng123@gmail.com?subject=${inputSubject}&body=${inputMessage}`;

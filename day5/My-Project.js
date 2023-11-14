@@ -1,97 +1,76 @@
-const data = [];
+let dataBlog = [];
 
 function submitData(event) {
     event.preventDefault();
+    const projectName = document.getElementById("inputMyProject");
+    const startDate = document.getElementById("startDate");
+    const endDate = document.getElementById("endDate");
+    const description = document.getElementById("inputContent");
+    const technologies = document.querySelectorAll("input[type=checkbox]:checked");
+    const image = document.getElementById("inputImage");
 
-    const title = getValueById('inputMyProject');
-    const startDate = getValueById('startDate');
-    const endDate = getValueById('endDate');
-    const content = getValueById('inputContent');
+    if (projectName && startDate && endDate && description && technologies && image) {
+        const projectNameValue = projectName.value;
+        const startDateValue = startDate.value;
+        const endDateValue = endDate.value;
+        const descriptionValue = description.value;
+        const technologiesValue = Array.from(technologies).map((tech) => tech.value);
+        const imageValue = image.files[0];
 
-    const technologies = [];
-    const checkboxes = document.querySelectorAll('.checkbox input[type="checkbox"]:checked');
-    checkboxes.forEach(function (checkbox) {
-        technologies.push(checkbox.nextSibling.textContent.trim());
-    });
+        if (imageValue) {
+            const imageUrl = URL.createObjectURL(imageValue);
 
-    const imageFile = document.getElementById('inputImage').files[0];
+            console.log(projectNameValue, startDateValue, endDateValue, descriptionValue, technologiesValue, imageUrl);
+            
+            console.log("My Project", projectNameValue);
+            console.log("content", descriptionValue);
 
-    if (!isValidInput(title, startDate, endDate, content, technologies, imageFile)) {
-        return;
+            const blog = {
+                MyProject: projectNameValue,
+                content: descriptionValue,
+                technologies: technologiesValue,
+                image: imageUrl,
+                postAt: "09 November 2023",
+                author: "Ravano Akbar Widodo"
+            }
+
+            dataBlog.push(blog);
+            renderBlog();
+        }
     }
-
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        const image = e.target.result;
-
-        const project = {
-            title,
-            startDate,
-            endDate,
-            content,
-            technologies,
-            image,
-        };
-
-        data.push(project);
-        renderProjects();
-    };
-
-    reader.readAsDataURL(imageFile);
-
-    resetFormFields();
 }
 
-function getValueById(id) {
-    return document.getElementById(id).value.trim();
-}
-
-function isValidInput(title, startDate, endDate, content, technologies, imageFile) {
-    if (!title || !startDate || !endDate || !content || technologies.length === 0 || !imageFile) {
-        showAlert('Please fill in all fields and select at least one technology.');
-        return false;
+function renderBlog() {
+    const contentsElement = document.getElementById("contents");
+    contentsElement.innerHTML = '';
+    
+    for (let index = 0; index < dataBlog.length; index++) {
+        contentsElement.innerHTML += `
+        <div class="blog-list-item">
+            <div class="blog-image">
+                <img src="${dataBlog[index].image}" alt="" />
+            </div>
+            <div class="blog-content">
+                <div class="btn-group">
+                    <button class="btn-edit">Edit Post</button>
+                    <button class="btn-post">Delete Post</button>
+                </div>
+                <h1>
+                    <a href="My-Project-detail.html" target="_blank">${dataBlog[index].title}</a>
+                </h1>
+                <div class="detail-blog-content">
+                    ${dataBlog[index].postAt} | ${dataBlog[index].author}
+                </div>
+                <p>
+                   ${dataBlog[index].content}
+                </p>
+                <div class="technologies">
+                    <label>Technologies:</label>
+                    <ul>
+                        ${dataBlog[index].technologies.map((tech) => `<li>${tech}</li>`).join('')}
+                    </ul>
+                </div>
+            </div>
+        </div>`;
     }
-
-    const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    if (!allowedImageTypes.includes(imageFile.type)) {
-        showAlert('Please upload a valid image file (JPEG, PNG, or GIF).');
-        return false;
-    }
-
-    return true;
-}
-
-function showAlert(message) {
-    alert(message);
-}
-
-function resetFormFields() {
-    const formFields = ['inputMyProject', 'startDate', 'endDate', 'inputContent', 'inputImage'];
-    formFields.forEach((field) => {
-        document.getElementById(field).value = '';
-    });
-
-    const checkboxes = document.querySelectorAll('.checkbox input[type="checkbox"]');
-    checkboxes.forEach((checkbox) => (checkbox.checked = false));
-}
-
-function renderProjects() {
-    const contents = document.getElementById('contents');
-    contents.innerHTML = '';
-
-    data.forEach((project) => {
-        const projectCard = document.createElement('div');
-        projectCard.classList.add('project-card');
-
-        projectCard.innerHTML = `
-            <h3>${project.title}</h3>
-            <p>Start Date: ${project.startDate}</p>
-            <p>End Date: ${project.endDate}</p>
-            <p>Description: ${project.content}</p>
-            <p>Technologies: ${project.technologies.join(', ')}</p>
-            <img src="${project.image}" alt="${project.title}" />
-        `;
-
-        contents.appendChild(projectCard);
-    });
 }

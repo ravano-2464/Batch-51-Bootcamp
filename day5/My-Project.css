@@ -5,25 +5,35 @@
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.btn-contact {
-    background-color: gray;
-    color: white;
+.btn-contact,
+.btn-submit {
+    background-color: #f7f7f7;
+    color: #333;
     padding: 10px;
     width: 130px;
-    font-size: 20px;
+    font-size: 16px;
     border-radius: 10px;
     text-decoration: none;
     text-align: center;
+    border: 2px solid #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-contact:hover,
+.btn-submit:hover {
+    background-color: #333;
+    color: #fff;
 }
 
 .nav-link {
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .nav-link a {
-    color: black;
+    color: #333;
     text-decoration: none;
 }
 
@@ -31,7 +41,6 @@
     color: orangered;
 }
 
-/* Blog Form */
 .Blog-form {
     padding: 50px 0;
     display: flex;
@@ -39,7 +48,8 @@
 }
 
 .Blog-form .form-container {
-    width: 500px;
+    width: 80%;
+    max-width: 600px;
 }
 
 .Blog-form .form-container h1 {
@@ -48,43 +58,31 @@
 }
 
 .Blog-form form label {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
 }
 
 .Blog-form form input,
-textarea,
-select {
+.Blog-form form textarea,
+.Blog-form form select,
+.Blog-form form .input-Blog-image-group {
     width: 100%;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
     padding: 8px;
     margin-top: 5px;
     margin-bottom: 20px;
-    background: #f4f3f3;
-    border: 1px solid #c4c4c4;
+    background: #f7f7f7;
+    border: 1px solid #ddd;
     border-radius: 8px;
 }
 
 .Blog-form form textarea {
-    height: 250px;
-}
-
-.Blog-form form .input-Blog-image-group {
-    width: 100%;
-    font-size: 20px;
-    font-weight: 400;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    background: #f4f3f3;
-    border: 1px solid #c4c4c4;
-    border-radius: 8px;
-    cursor: pointer;
+    height: 150px;
 }
 
 .Blog-form form .input-Blog-image-group label p {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .Blog-form form .input-Blog-image-group label {
@@ -99,27 +97,32 @@ select {
 }
 
 .Blog-form form button {
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 8px 20px;
-    font-size: 17px;
-    background: gray;
+    font-size: 16px;
+    background: #333;
     border-radius: 8px;
     border: none;
     color: #fff;
     cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.Blog-form form button:hover {
+    background-color: #f7f7f7;
+    color: #333;
 }
 
 .Blog hr {
-    border: 1px solid #dbdbdb;
+    border: 1px solid #ddd;
     width: 80%;
     margin-right: auto;
     margin-left: auto;
 }
 
-/* Blog list */
 .Blog .Blog-list {
-    margin-top: 80px;
-    margin-bottom: 80px;
+    margin-top: 40px;
+    margin-bottom: 40px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -127,11 +130,13 @@ select {
 
 .Blog .Blog-list .Blog-list-item {
     width: 80%;
+    max-width: 800px;
     padding: 15px;
     margin-bottom: 20px;
-    border: 2px solid #dbdbdb;
+    border: 2px solid #ddd;
     border-radius: 8px;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .Blog .Blog-list .Blog-list-item .Blog-image {
@@ -140,7 +145,8 @@ select {
 
 .Blog .Blog-list .Blog-list-item .Blog-image img {
     width: 100%;
-    height: 300px;
+    height: auto;
+    border-radius: 8px;
     object-fit: cover;
 }
 
@@ -154,41 +160,49 @@ select {
     margin-bottom: 20px;
 }
 
-.Blog .Blog-list .btn-group .btn-edit {
-    padding: 5px 10px;
-    border: 0;
-    border-radius: 4px;
-    background: #dbdbdb;
-}
-
+.Blog .Blog-list .btn-group .btn-edit,
 .Blog .Blog-list .btn-group .btn-post {
     padding: 5px 10px;
     border: 0;
     border-radius: 4px;
-    background: gray;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.Blog .Blog-list .btn-group .btn-edit {
+    background: #f7f7f7;
+}
+
+.Blog .Blog-list .btn-group .btn-post {
+    background: #333;
+    color: #fff;
+}
+
+.Blog .Blog-list .btn-group .btn-edit:hover,
+.Blog .Blog-list .btn-group .btn-post:hover {
+    background-color: #333;
     color: #fff;
 }
 
 .Blog .Blog-list h1 a {
     text-decoration: none;
-    color: #000000;
+    color: #000;
 }
 
 .Blog .Blog-list .detail-Blog-content {
     font-weight: 300;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 20px;
 }
 
 .Blog .Blog-list .Blog-list-item p {
     margin-top: 20px;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 20px;
     text-align: justify;
 }
 
-/* Blog Detail */
 .Blog-detail {
     display: flex;
     justify-content: center;
@@ -196,24 +210,27 @@ select {
 
 .Blog-detail-container {
     width: 80%;
+    max-width: 800px;
     margin: 40px 0;
 }
 
 .Blog-detail-container img {
     width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
 .Blog-detail-container h1 {
     font-style: normal;
     font-weight: 800;
-    font-size: 44px;
+    font-size: 36px;
     line-height: 120%;
     margin-bottom: 15px;
 }
 
 .Blog-detail-container .author {
     font-weight: 100;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 120%;
     margin-bottom: 20px;
 }
@@ -222,7 +239,40 @@ select {
     margin-top: 40px;
     font-style: normal;
     font-weight: normal;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 140%;
     text-align: justify;
+}
+
+.text-checkbox {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-basis: 50%; 
+}
+
+.checkbox input {
+    margin-right: 8px;
+}
+
+
+.button-group {
+    text-align: center;
+}
+
+.submit-contact {
+    font-size: 12px;
+    padding: 8px 12px;
 }

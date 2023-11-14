@@ -3,15 +3,48 @@
 
 <head>
     <title>Creating My Project</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="My-Project.css" />
+
     <style>
-        .checkbox div {
+         .Blog-list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+        
+        .text-checkbox {
+            font-size: 14px;
             display: flex;
             align-items: center;
         }
 
+        .checkbox div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
         .checkbox input {
             margin-right: 8px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .button-group {
+            text-align: center;
         }
     </style>
 </head>
@@ -26,13 +59,11 @@
                 <li class="nav-link">
                     <a href="index.html">Home</a>
                 </li>
-                <li class="nav-link Blog">
-                    <a href="My-Project.html">
-                        My Project
-                    </a>
+                <li class="nav-link">
+                    <a href="My-Project.html">My Project</a>
                 </li>
             </ul>
-            <div style="display: flex; width: 100%; justify-content: end;">
+            <div style="display: flex; width: 100%; justify-content: flex-end;">
                 <a href="contact.html" class="btn-contact">Contact me</a>
             </div>
         </div>
@@ -41,11 +72,11 @@
     <div class="Blog">
         <div class="Blog-form">
             <div class="form-container">
-                <form onsubmit="submitBlog(event)">
+                <form onsubmit="submitData(event)">
                     <h1>ADD MY PROJECT</h1>
                     <div>
-                        <label for="inputTitle">Project Name</label>
-                        <input type="text" id="inputTitle" />
+                        <label for="inputMyProject">Project Name</label>
+                        <input type="text" id="inputMyProject" />
                     </div>
                     <div style="display: flex; gap: 20px;">
                         <div>
@@ -62,7 +93,8 @@
                         <textarea id="inputContent"></textarea>
                     </div>
                     <label>Technologies</label>
-                    <div class="checkbox">
+                    <div class="checkbox" text-align>
+                        <br>
                         <div>
                             <input type="checkbox" id="inputNodejs" />
                             <label class="text-checkbox">Node Js</label>
@@ -91,9 +123,7 @@
                             <input type="file" id="inputImage" hidden />
                         </div>
                     </div>
-                    <div class="button-group">
-                        <button>Submit</button>
-                    </div>
+                    <input type="submit" value="Submit" class="submit-contact" />
                 </form>
             </div>
         </div>
@@ -101,10 +131,15 @@
         <hr class="line" />
 
         <div>
-            <h2>My Projects</h2>
+            <h2 style="text-align: center;">My Projects</h2>
             <div id="contents" class="Blog-list">
+                <div class="card-icons">
+                    <i class="fa-brands fa-google-play fa-xl"></i>
+                    <i class="fa-brands fa-android fa-xl"></i>
+                    <i class="fa-brands fa-java fa-lg"></i>
             </div>
         </div>
+        
     </div>
     <script src="My-Project.js"></script>
 </body>

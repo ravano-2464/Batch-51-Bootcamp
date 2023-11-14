@@ -253,18 +253,20 @@
 .checkbox {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px; 
 }
 
 .checkbox-item {
     display: flex;
     align-items: center;
-    margin-right: 15px;
     margin-bottom: 10px;
+    flex-basis: 50%; 
 }
 
 .checkbox input {
     margin-right: 8px;
 }
+
 
 .button-group {
     text-align: center;

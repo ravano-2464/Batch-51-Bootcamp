@@ -64,7 +64,7 @@ function renderBlog() {
                 <p>
                    ${dataBlog[index].content}
                 </p>
-                <div>
+                <div class="technologies">
                     <label>Technologies:</label>
                     <ul>
                         ${dataBlog[index].technologies.map((tech) => `<li>${tech}</li>`).join('')}

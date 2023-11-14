@@ -1,154 +1,76 @@
-const data = [];
+let dataBlog = [];
 
-function submitBlog(event) {
-  event.preventDefault();
+function submitData(event) {
+    event.preventDefault();
+    const projectName = document.getElementById("inputMyProject");
+    const startDate = document.getElementById("startDate");
+    const endDate = document.getElementById("endDate");
+    const description = document.getElementById("inputContent");
+    const technologies = document.querySelectorAll("input[type=checkbox]:checked");
+    const image = document.getElementById("inputImage");
 
-  const title = document.getElementById("pName").value
-  const s_date = document.getElementById("s-date").value
-  const e_date = document.getElementById("e-date").value
-  const content = document.getElementById("description").value
-  const isUsingNodeJs = document.getElementById("tech1").checked
-  const isUsingReactJs = document.getElementById("tech2").checked
-  const isUsingNextJs = document.getElementById("tech3").checked
-  const isUsingTypescript = document.getElementById("tech4").checked
-  let image = document.getElementById("attachFile").files
-  const p_duration = durationInDays(s_date, e_date)
+    if (projectName && startDate && endDate && description && technologies && image) {
+        const projectNameValue = projectName.value;
+        const startDateValue = startDate.value;
+        const endDateValue = endDate.value;
+        const descriptionValue = description.value;
+        const technologiesValue = Array.from(technologies).map((tech) => tech.value);
+        const imageValue = image.files[0];
 
-  
-  // Validation
-  if (title === "") {
-    alert("Project name must be filled");
-    return;
-  }
-  if (s_date === "") {
-    alert("Start date must be filled");
-    return;
-  }
-  if (e_date === "") {
-    alert("End date must be filled");
-    return;
-  }
-  if (content === "") {
-    alert("Description must be filled");
-    return;
-  } 
-  if (image.length === 0) {
-    alert("Must upload a picture");
-    return;
-  }
-  if (p_duration <= 0) {
-    alert("Start date cannot less than end date")
-    return;
-  }
+        if (imageValue) {
+            const imageUrl = URL.createObjectURL(imageValue);
 
-  
-  //display image
-  image = URL.createObjectURL(image[0])
+            console.log(projectNameValue, startDateValue, endDateValue, descriptionValue, technologiesValue, imageUrl);
+            
+            console.log("My Project", projectNameValue);
+            console.log("content", descriptionValue);
 
-  //display duration
-  const duration = durationInMonth(p_duration)
+            const blog = {
+                MyProject: projectNameValue,
+                content: descriptionValue,
+                technologies: technologiesValue,
+                image: imageUrl,
+                postAt: "09 November 2023",
+                author: "Ravano Akbar Widodo"
+            }
 
-  const obj = {
-    title,
-    s_date,
-    e_date,
-    duration,
-    image,
-    content,
-    isUsingNodeJs,
-    isUsingReactJs,
-    isUsingNextJs,
-    isUsingTypescript,
-  }
-
-  data.push(obj)
-  renderProject()
-
+            dataBlog.push(blog);
+            renderBlog();
+        }
+    }
 }
 
-function renderProject() {
-  document.getElementById("project-li").innerHTML = ""
-  for (let i = 0; i < data.length; i++) {
-
-    // post content
-    document.getElementById("project-li").innerHTML += `
-        <div class="project-container" id="project-item">
-                <a href="./project-details.html">
-                <div class="project-image">
-                    <img src="${data[i].image}">
+function renderBlog() {
+    const contentsElement = document.getElementById("contents");
+    contentsElement.innerHTML = '';
+    
+    for (let index = 0; index < dataBlog.length; index++) {
+        contentsElement.innerHTML += `
+        <div class="blog-list-item">
+            <div class="blog-image">
+                <img src="${dataBlog[index].image}" alt="" />
+            </div>
+            <div class="blog-content">
+                <div class="btn-group">
+                    <button class="btn-edit">Edit Post</button>
+                    <button class="btn-post">Delete Post</button>
                 </div>
-                <p style="font-weight: bold;">${data[i].title}</p>
-                <p style="font-size: 15px; color: gray;">Duration : ${data[i].duration}</p>
-
-                <div class="project-content">
-                    <p>
-                        ${data[i].content}
-                    </p>
+                <h1>
+                    <a href="My-Project-detail.html" target="_blank">${dataBlog[index].title}</a>
+                </h1>
+                <div class="detail-blog-content">
+                    ${dataBlog[index].postAt} | ${dataBlog[index].author}
                 </div>
-
-               <div class="project-icon">                                           
+                <p>
+                   ${dataBlog[index].content}
+                </p>
+                <div>
+                    <label>Technologies:</label>
                     <ul>
-                        ${renderTechImages(data[i])}
+                        ${dataBlog[index].technologies.map((tech) => `<li>${tech}</li>`).join('')}
                     </ul>
                 </div>
-                <div class="project-button">
-                    <button class="edit" type="button">Edit</button>
-                    <button class="delete" type="button">Delete</button>
-                </div>
-                </a>
-            </div>`
-  }
-}
-
-//render tech images
-function renderTechImages(Object) {
-  let renderImages = "";
-
-  if (Object.isUsingNodeJs) {
-      renderImages += `<li><img src="./assets/images/nodejs.png" alt="node-js"></li>`;
-  }
-  if (Object.isUsingReactJs) {
-      renderImages += `<li><img src="./assets/images/reactjs.png" alt="node-js"></li>`;
-  }
-  if (Object.isUsingNextJs) {
-      renderImages += `<li><img src="./assets/images/nextjs.png" alt="next-js"></li>`;
-  }
-  if (Object.isUsingTypescript) {
-      renderImages += `<li><img src="./assets/images/typescript.png" alt="typescript"></li>`;
-  }
-
-  return renderImages;
-}
-
-// add duration in days
-function durationInDays(s_date, e_date) {
-  // 1000 msec, 60 sec, 60 minutes, 24 hours
-  const oneDay = 1000*60*60*24;
-
-  const s_dateMs = new Date(s_date).getTime();
-  const e_dateMs = new Date(e_date).getTime();
-  const durationMs = e_dateMs - s_dateMs;
-
-  // add 1 day if start & end is same day
-  return Math.floor(durationMs/oneDay);
-}
-
-// add duration in month
-function durationInMonth(days) {
-  monthDuration = Math.floor(days/30);
-  daysDuration = days%30;
-
-  // if less than a month return to days
-  if (monthDuration == 0) {
-    return `${daysDuration} Days`;
-  }
-
-  if (daysDuration > 20) {
-    monthDuration ++;
-  }
-  else if (daysDuration <= 20 && daysDuration > 10) {
-    monthDuration += 0.5;
-  }
-
-  return `${monthDuration} Months`
+            </div>
+        </div>`;
+    }
 }

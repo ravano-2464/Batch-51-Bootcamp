@@ -1,115 +1,97 @@
-function getFullTime(tanggal) {
-    const monthList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+const data = [];
 
-    const date = tanggal.getDate()
-    const month = tanggal.getMonth()
-    const year = tanggal.getFullYear()
-    let hours = tanggal.getHours()
-    let minutes = tanggal.getMinutes()
+function submitData(event) {
+    event.preventDefault();
 
-    if (hours <= 9) {
-        hours = "0" + hours
+    const title = getValueById('inputMyProject');
+    const startDate = getValueById('startDate');
+    const endDate = getValueById('endDate');
+    const content = getValueById('inputContent');
+
+    const technologies = [];
+    const checkboxes = document.querySelectorAll('.checkbox input[type="checkbox"]:checked');
+    checkboxes.forEach(function (checkbox) {
+        technologies.push(checkbox.nextSibling.textContent.trim());
+    });
+
+    const imageFile = document.getElementById('inputImage').files[0];
+
+    if (!isValidInput(title, startDate, endDate, content, technologies, imageFile)) {
+        return;
     }
 
-    if (minutes <= 9) {
-        minutes = "0" + minutes
-    }
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const image = e.target.result;
 
-    return `${date} ${monthList[month]} ${year} ${hours}:${minutes}`
+        const project = {
+            title,
+            startDate,
+            endDate,
+            content,
+            technologies,
+            image,
+        };
+
+        data.push(project);
+        renderProjects();
+    };
+
+    reader.readAsDataURL(imageFile);
+
+    resetFormFields();
 }
 
-function getDistanceTime(time) {
-    const timeNow = new Date().getTime() 
-    const timePosted = time 
-
-    const distance = timeNow - timePosted 
-    const distanceSeconds = Math.floor(distance / 1000)
-    const distanceMinutes = Math.floor(distance / 1000 / 60)
-    const distanceHours = Math.floor(distance / 1000 / 60 / 60)
-    const distanceDay = Math.floor(distance / 1000 / 60 / 60 / 24)
-
-    console.log("distanceSeconds", distanceSeconds)
-    console.log("distanceMinutes", distanceMinutes)
-    console.log("distanceHours", distanceHours)
-    console.log("distanceDay", distanceDay)
-
-    if (distanceDay > 0) {
-        return `${distanceDay} day ago`
-    } else if (distanceHours > 0) {
-        return `${distanceHours} hours ago`
-    } else if (distanceMinutes > 0) {
-        return `${distanceMinutes} minutes ago`
-    } else {
-        return `${distanceSeconds} seconds ago `
-    }
+function getValueById(id) {
+    return document.getElementById(id).value.trim();
 }
 
-const dataBlog = []
-
-function submitBlog(event) {
-    event.preventDefault()
-
-    let inputTitle = document.getElementById("inputTitle").value
-    let inputContent = document.getElementById("inputContent").value
-    let inputImage = document.getElementById("inputImage").files
-
-    console.log("title", inputTitle)
-    console.log("content", inputContent)
-
-    inputImage = URL.createObjectURL(inputImage[0])
-    console.log("image", inputImage)
-
-    const Blog = {
-        title: inputTitle,
-        content: inputContent,
-        image: inputImage,
-        postAt: new Date(),
-        author: "Ravano Akbar Widodo",
-        nodeJs: true,
-        reactJs: true,
-        nextJs: false,
-        typescript: false,
+function isValidInput(title, startDate, endDate, content, technologies, imageFile) {
+    if (!title || !startDate || !endDate || !content || technologies.length === 0 || !imageFile) {
+        showAlert('Please fill in all fields and select at least one technology.');
+        return false;
     }
 
-    dataBlog.push(Blog)
-    console.log("dataBlog", dataBlog)
-    renderBlog()
-}
-
-function renderBlog() {
-    document.getElementById("contents").innerHTML = ''
-    for (let index = 0; index < dataBlog.length; index++) {
-        document.getElementById("contents").innerHTML += `
-        <div class="Blog-list-item">
-            <div class="Blog-image">
-                <img src="${dataBlog[index].image}" alt="" />
-            </div>
-            <div class="Blog-content">
-                <div class="btn-group">
-                    <button class="btn-edit">Edit Post</button>
-                    <button class="btn-post">Delete Post</button>
-                </div>
-                <h1>
-                    <a href="Blog-detail.html" target="_blank">${dataBlog[index].title}</a>
-                </h1>
-                <div class="detail-Blog-content">
-                    ${getFullTime(dataBlog[index].postAt)} | ${dataBlog[index].author}
-                </div>
-                ${dataBlog[index].nodeJs ? "nodeJs" : ""}
-                ${dataBlog[index].reactJs ? "reactJs" : ""}
-                ${dataBlog[index].nextJs ? "nextJs" : ""}
-                ${dataBlog[index].typescript ? "typescript" : ""}            
-                <p>
-                   ${dataBlog[index].content}
-                </p>
-                <p>
-                    ${getDistanceTime(dataBlog[index].postAt)}
-                </p>
-            </div>
-        </div>`
+    const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!allowedImageTypes.includes(imageFile.type)) {
+        showAlert('Please upload a valid image file (JPEG, PNG, or GIF).');
+        return false;
     }
+
+    return true;
 }
 
-setInterval(function() {
-    renderBlog()
-}, 1000)
+function showAlert(message) {
+    alert(message);
+}
+
+function resetFormFields() {
+    const formFields = ['inputMyProject', 'startDate', 'endDate', 'inputContent', 'inputImage'];
+    formFields.forEach((field) => {
+        document.getElementById(field).value = '';
+    });
+
+    const checkboxes = document.querySelectorAll('.checkbox input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => (checkbox.checked = false));
+}
+
+function renderProjects() {
+    const contents = document.getElementById('contents');
+    contents.innerHTML = '';
+
+    data.forEach((project) => {
+        const projectCard = document.createElement('div');
+        projectCard.classList.add('project-card');
+
+        projectCard.innerHTML = `
+            <h3>${project.title}</h3>
+            <p>Start Date: ${project.startDate}</p>
+            <p>End Date: ${project.endDate}</p>
+            <p>Description: ${project.content}</p>
+            <p>Technologies: ${project.technologies.join(', ')}</p>
+            <img src="${project.image}" alt="${project.title}" />
+        `;
+
+        contents.appendChild(projectCard);
+    });
+}

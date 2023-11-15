@@ -9,7 +9,7 @@ function submitData(event) {
     const technologies = document.querySelectorAll("input[type=checkbox]:checked");
     const image = document.getElementById("inputImage");
 
-    if (projectName && startDate && endDate && description && technologies && image) {
+    if (projectName && startDate && endDate && description && technologies && image && image.files.length > 0) {
         const projectNameValue = projectName.value;
         const startDateValue = startDate.value;
         const endDateValue = endDate.value;
@@ -21,12 +21,9 @@ function submitData(event) {
             const imageUrl = URL.createObjectURL(imageValue);
 
             console.log(projectNameValue, startDateValue, endDateValue, descriptionValue, technologiesValue, imageUrl);
-            
-            console.log("My Project", projectNameValue);
-            console.log("content", descriptionValue);
 
             const blog = {
-                MyProject: projectNameValue,
+                title: projectNameValue, // Adding 'title' property
                 content: descriptionValue,
                 technologies: technologiesValue,
                 image: imageUrl,
@@ -43,7 +40,7 @@ function submitData(event) {
 function renderBlog() {
     const contentsElement = document.getElementById("contents");
     contentsElement.innerHTML = '';
-    
+
     for (let index = 0; index < dataBlog.length; index++) {
         contentsElement.innerHTML += `
         <div class="blog-list-item">

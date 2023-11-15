@@ -23,7 +23,7 @@ function submitData(event) {
             console.log(projectNameValue, startDateValue, endDateValue, descriptionValue, technologiesValue, imageUrl);
 
             const blog = {
-                title: projectNameValue, // Adding 'title' property
+                title: projectNameValue, 
                 content: descriptionValue,
                 technologies: technologiesValue,
                 image: imageUrl,

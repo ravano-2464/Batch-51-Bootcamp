@@ -28,12 +28,11 @@ nav ul li {
 }
 
 nav ul li .active {
-    color: orangered;
+    color: black;
 }
 
 .nav-left {
     flex: 50%;
-    /* mengatur lebar */
 }
 
 .nav-right {
@@ -43,7 +42,7 @@ nav ul li .active {
 }
 
 .nav-right a {
-    background-color: orangered;
+    background-color: black;
     padding: 8px 20px;
     color: white;
     border-radius: 5px;
@@ -68,7 +67,6 @@ nav ul li {
 
 .nav-left {
     flex: 50%;
-    /* mengatur lebar */
 }
 
 .nav-right {
@@ -78,7 +76,7 @@ nav ul li {
 }
 
 .nav-right a {
-    background-color: orangered;
+    background-color: black;
     padding: 8px 20px;
     color: white;
     border-radius: 5px;
@@ -116,7 +114,7 @@ nav ul li {
 .hamburger-nav-container .hamburger-active {
     text-decoration: none;
     color: #fff;
-    background-color: orangered;
+    background-color: black;
     display: flex;
     align-items: center;
     justify-content: center;

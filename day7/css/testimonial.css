@@ -31,6 +31,10 @@ nav ul li .active {
     color: black;
 }
 
+.nav-link a:hover {
+    color: orangered;
+}
+
 .nav-left {
     flex: 50%;
 }

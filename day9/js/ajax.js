@@ -1,7 +1,7 @@
 // penggabungan promise dan juga ajax
 const janji = new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
-    xhr.open('GET', 'https://www.npoint.io/docs/2017734110c4bc68e0fb', true)
+    xhr.open('GET', 'https://api.npoint.io/2017734110c4bc68e0fb', true)
     xhr.onload = () => {
         if (xhr.status === 200) {
             // console.log("berhasil", xhr.response)

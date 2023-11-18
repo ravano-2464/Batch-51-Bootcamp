@@ -1,0 +1,26 @@
+[
+    {
+      "image": "https://images.pexels.com/photos/3754285/pexels-photo-3754285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "author": "Ravano Akbar Widodo",
+      "rating": 5,
+      "content": "Keren banget jasanya! Top notch!"
+    },
+    {
+      "image": "https://images.pexels.com/photos/3754285/pexels-photo-3754285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "author": "Novri",
+      "rating": 5,
+      "content": "Keren banget!"
+    },
+    {
+      "image": "https://images.pexels.com/photos/3468827/pexels-photo-3468827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "author": "Denis",
+      "rating": 1,
+      "content": "Apasih bang!"
+    },
+    {
+      "image": "https://images.pexels.com/photos/3468827/pexels-photo-3468827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "author": "Febry",
+      "rating": 4,
+      "content": "Oke deh!"
+    }
+  ]

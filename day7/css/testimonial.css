@@ -45,6 +45,10 @@ nav ul li .active {
     margin-right: 25px;
 }
 
+.nav-link a {
+    color: black; 
+}
+
 .nav-right a {
     background-color: black;
     padding: 8px 20px;

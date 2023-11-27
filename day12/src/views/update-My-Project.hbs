@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Add New My Project</title>
+    <title>Update My Project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/css/My-Project.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -49,15 +49,16 @@
     <div class="blog">
         <div class="blog-form">
             <div class="form-container">
-                <form method="post" action="/add-my-project">
-                    <h1>Create Post My Project</h1>
+                <form method="post" action="/update-My-Project">
+                    <h1>Update Post My Project</h1>
+                    <input type="hidden" name="id" value="{{data.id}}" />
                     <div>
                         <label for="inputTitle">Title</label>
-                        <input type="text" id="inputTitle" name="title" />
+                        <input type="text" id="inputTitle" name="title" value="{{data.title}}" />
                     </div>
                     <div>
                         <label for="inputContent">Content</label>
-                        <textarea id="inputContent" name="content"></textarea>
+                        <textarea id="inputContent" name="content">{{data.content}}</textarea>
                     </div>
                     <div>
                         <label>Upload Image</label>
@@ -70,7 +71,7 @@
                         </div>
                     </div>
                     <div class="button-group">
-                        <button>Post My Project</button>
+                        <button>Update My Project</button>
                     </div>
                 </form>
             </div>

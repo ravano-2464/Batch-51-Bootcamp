@@ -38,14 +38,14 @@
 // const testimonial2 = new Testimonial("Hima", "Saya bangga dengan City", "https://images.pexels.com/photos/3468827/pexels-photo-3468827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
 // const testimonial3 = new Testimonial("Tayo", "Saya malu dengan MU", "https://images.pexels.com/photos/936019/pexels-photo-936019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")
 
-// const testimonials = [testimonial1, testimonial2, testimonial3]
+// const testimonial = [testimonial1, testimonial2, testimonial3]
 
 // let testimonialHTML = ``
-// for(let index = 0; index < testimonials.length; index++) {
-//     testimonialHTML += testimonials[index].html()
+// for(let index = 0; index < testimonial.length; index++) {
+//     testimonialHTML += testimonial[index].html()
 // }
 
-// document.getElementById("testimonials").innerHTML = testimonialHTML
+// document.getElementById("testimonial").innerHTML = testimonialHTML
 
 const testimonialData = [
     {
@@ -83,18 +83,18 @@ function html(item) {
 </div>`
 }
 
-function allTestimonials() {
+function alltestimonial() {
     let testimonialHTML = ``
     testimonialData.forEach((item) => {
         testimonialHTML += html(item)
     })
 
-    document.getElementById("testimonials").innerHTML = testimonialHTML
+    document.getElementById("testimonial").innerHTML = testimonialHTML
 }
 
-allTestimonials()
+alltestimonial()
 
-function filterTestimonials(rating) {
+function filtertestimonial(rating) {
     let testimonialHTML = ``
     const testimonialFiltered = testimonialData.filter((item) => {
         return item.rating === rating
@@ -108,5 +108,5 @@ function filterTestimonials(rating) {
         })
     }
 
-    document.getElementById("testimonials").innerHTML = testimonialHTML
+    document.getElementById("testimonial").innerHTML = testimonialHTML
 }

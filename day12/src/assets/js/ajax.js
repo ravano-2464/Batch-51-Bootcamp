@@ -28,7 +28,7 @@ function html(item) {
 </div>`
 }
 
-async function allTestimonials() {
+async function alltestimonial() {
     let testimonialHTML = ``
     const testimonialData = await janji
     // const response = await fetch('https://api.npoint.io/8cb224c89fa998fae96a', {
@@ -42,12 +42,12 @@ async function allTestimonials() {
         testimonialHTML += html(item)
     })
 
-    document.getElementById("testimonials").innerHTML = testimonialHTML
+    document.getElementById("testimonial").innerHTML = testimonialHTML
 }
 
-allTestimonials()
+alltestimonial()
 
-async function filterTestimonials(rating) {
+async function filtertestimonial(rating) {
     let testimonialHTML = ``
     const testimonialData = await janji
     // const response = await fetch('https://api.npoint.io/8cb224c89fa998fae96a', {
@@ -68,5 +68,5 @@ async function filterTestimonials(rating) {
         })
     }
 
-    document.getElementById("testimonials").innerHTML = testimonialHTML
+    document.getElementById("testimonial").innerHTML = testimonialHTML
 }

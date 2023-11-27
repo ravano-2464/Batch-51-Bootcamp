@@ -1,135 +1,85 @@
-// LOOPING : FOR, WHILE, DO-WHILE
-
-// FOR -> perulangan yang kamu sudah tau kapan harus berhenti
-// for(let index = 0; index < 10; index++) { 
-//     console.log("ini adalah index", index)
-// }
-
-// WHILE -> perulangan yang belum tentu kamu tau kapan harus berhenti (berdasarkan data dinamis)
-
-// DO WHILE -> perulangan yang jalan dulu sekali, baru dicek
-
-
-function getFullTime(tanggal) {
-    const monthList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-
-    const date = tanggal.getDate()
-    const month = tanggal.getMonth()
-    const year = tanggal.getFullYear()
-    let hours = tanggal.getHours()
-    let minutes = tanggal.getMinutes()
-
-    if (hours <= 9) {
-        hours = "0" + hours
-    }
-
-    if (minutes <= 9) {
-        minutes = "0" + minutes
-    }
-
-    return `${date} ${monthList[month]} ${year} ${hours}:${minutes}`
-}
-
 function getDistanceTime(time) {
-    const timeNow = new Date().getTime() // jam sekarang miliseconds
-    const timePosted = time 
+    const timeNow = new Date().getTime(); // jam sekarang miliseconds
+    const timePosted = time;
 
-    const distance = timeNow - timePosted // miliseconds
+    const distance = timeNow - timePosted; // miliseconds
 
     // Math :
     // floor -> dibulatkan ke bawah, ex : 8.6 -> 8
     // round -> dibulatkan angka terdekat, ex : 8.3 -> 8
     // ceil -> dibulatkan ke atas, ex : 8.3 -> 9
 
-    const distanceSeconds = Math.floor(distance / 1000)
-    const distanceMinutes = Math.floor(distance / 1000 / 60)
-    const distanceHours = Math.floor(distance / 1000 / 60 / 60)
-    const distanceDay = Math.floor(distance / 1000 / 60 / 60 / 24)
+    const distanceSeconds = Math.floor(distance / 1000);
+    const distanceMinutes = Math.floor(distance / 1000 / 60);
+    const distanceHours = Math.floor(distance / 1000 / 60 / 60);
+    const distanceDay = Math.floor(distance / 1000 / 60 / 60 / 24);
 
-    console.log("distanceSeconds", distanceSeconds)
-    console.log("distanceMinutes", distanceMinutes)
-    console.log("distanceHours", distanceHours)
-    console.log("distanceDay", distanceDay)
+    console.log("distanceSeconds", distanceSeconds);
+    console.log("distanceMinutes", distanceMinutes);
+    console.log("distanceHours", distanceHours);
+    console.log("distanceDay", distanceDay);
 
     if (distanceDay > 0) {
-        return `${distanceDay} day ago`
+        return `${distanceDay} day ago`;
     } else if (distanceHours > 0) {
-        return `${distanceHours} hours ago`
+        return `${distanceHours} hours ago`;
     } else if (distanceMinutes > 0) {
-        return `${distanceMinutes} minutes ago`
+        return `${distanceMinutes} minutes ago`;
     } else {
-        return `${distanceSeconds} seconds ago `
+        return `${distanceSeconds} seconds ago `;
     }
 }
 
-const dataBlog = []
+let dataBlog = [];
 
-function submitBlog(event) {
-    event.preventDefault()
+function submitData(event) {
+    event.preventDefault();
+    const projectName = document.getElementById("inputMyProject");
+    const startDate = document.getElementById("startDate");
+    const endDate = document.getElementById("endDate");
+    const description = document.getElementById("inputContent");
+    const technologies = document.querySelectorAll("input[type=checkbox]:checked");
+    const image = document.getElementById("inputImage");
 
-    let inputTitle = document.getElementById("inputTitle").value
-    let inputContent = document.getElementById("inputContent").value
-    let inputImage = document.getElementById("inputImage").files
+    if (projectName && startDate && endDate && description && technologies && image && image.files.length > 0) {
+        const projectNameValue = projectName.value;
+        const startDateValue = startDate.value;
+        const endDateValue = endDate.value;
+        const descriptionValue = description.value;
+        const technologiesValue = Array.from(technologies).map((tech) => tech.value);
+        const imageValue = image.files[0];
 
-    console.log("title", inputTitle)
-    console.log("content", inputContent)
+        if (imageValue) {
+            const imageUrl = URL.createObjectURL(imageValue);
 
-    inputImage = URL.createObjectURL(inputImage[0])
-    console.log("image", inputImage)
+            console.log(projectNameValue, startDateValue, endDateValue, descriptionValue, technologiesValue, imageUrl);
 
-    const blog = {
-        title: inputTitle,
-        content: inputContent,
-        image: inputImage,
-        postAt: new Date(),
-        author: "Ravano Akbar Widodo",
-        nodeJs: true,
-        reactJs: true,
-        nextJs: false,
-        typescript: false,
+            const blog = {
+                title: projectNameValue, 
+                content: descriptionValue,
+                technologies: technologiesValue,
+                image: imageUrl,
+                postAt: new Date(),
+                author: "Ravano Akbar Widodo",
+                nodeJs: true,
+                reactJs: true,
+                nextJs: false,
+                typescript: false,
+            }
+
+            dataBlog.push(blog);
+            console.log("dataBlog", dataBlog)
+            renderBlog();
+        }
     }
-
-    dataBlog.push(blog)
-    console.log("dataBlog", dataBlog)
-    renderBlog()
 }
-
-// function showMeHelloWorld() {
-//     const container = document.getElementById("contents")
-//     container.innerHTML = '<p>Hello World</p>'
-// }
-
-// dataBlog = [
-//  {
-//     title: "title 1",
-//     content: "content 1"
-//  },
-//  {
-//     title: "title 1",
-//     content: "content 1"
-//  },
-//  {
-//     title: "title 2",
-//     content: "content 2"
-//  },
-//  {
-//     title: "title 1",
-//     content: "content 1"
-//  },
-//  {
-//     title: "title 2",
-//     content: "content 2"
-//  },
-//  {
-//     title: "title 3",
-//     content: "content 3"
-//  },
-// ]
 
 function renderBlog() {
-    document.getElementById("contents").innerHTML = ''
+    const contentsElement = document.getElementById("contents");
+    contentsElement.innerHTML = '';
+
     for (let index = 0; index < dataBlog.length; index++) {
-        document.getElementById("contents").innerHTML += `
+        contentsElement.innerHTML += `
         <div class="blog-list-item">
             <div class="blog-image">
                 <img src="${dataBlog[index].image}" alt="" />
@@ -140,26 +90,24 @@ function renderBlog() {
                     <button class="btn-post">Delete Post</button>
                 </div>
                 <h1>
-                    <a href="blog-detail.html" target="_blank">${dataBlog[index].title}</a>
+                    <a href="My-Project-detail.html" target="_blank">${dataBlog[index].title}</a>
                 </h1>
                 <div class="detail-blog-content">
-                    ${getFullTime(dataBlog[index].postAt)} | ${dataBlog[index].author}
+                    ${dataBlog[index].postAt} | ${dataBlog[index].author}
                 </div>
-                ${dataBlog[index].nodeJs ? "nodeJs" : ""}
-                ${dataBlog[index].reactJs ? "reactJs" : ""}
-                ${dataBlog[index].nextJs ? "nextJs" : ""}
-                ${dataBlog[index].typescript ? "typescript" : ""}            
                 <p>
                    ${dataBlog[index].content}
                 </p>
-                <p>
-                    ${getDistanceTime(dataBlog[index].postAt)}
-                </p>
+                <div class="technologies">
+                    <label>Technologies:</label>
+                    <ul>
+                        ${dataBlog[index].technologies.map((tech) => `<li>${tech}</li>`).join('')}
+                    </ul>
+                </div>
             </div>
-        </div>`
+        </div>`;
     }
 }
-
 
 setInterval(function() {
     renderBlog()

@@ -13,7 +13,7 @@ app.get('/about', (req, res) => {
 app.get('/testimonials', (req, res) => {
     res.json([
         {
-            author: 1123213,
+            author: "Ravano Akbar Widodo",
             content: "Keren banget jasanya! Top notch!",
             image: "https://images.pexels.com/photos/3754285/pexels-photo-3754285.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
             rating: 5

@@ -77,6 +77,11 @@ nav ul li .active {
     border-radius: 5px;
 }
 
+.nav-right a:hover {
+    background-color: #333;
+    color: #fff;
+}
+
 nav {
     background-color: #ebeaea;
     display: flex;
@@ -98,17 +103,23 @@ nav ul li {
     flex: 50%;
 }
 
-.nav-right {
+.nav-right:hover {
     flex: 50%;
     text-align: end;
     margin-right: 25px;
 }
 
 .nav-right a {
-    background-color: black;
-    padding: 8px 20px;
-    color: white;
-    border-radius: 5px;
+    background-color: #f7f7f7;
+    color: #333;
+    padding: 10px;
+    width: 130px;
+    font-size: 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+    border: 2px solid #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #barsmenu {
@@ -214,6 +225,7 @@ nav ul li {
     color: white;
     cursor: pointer;
 }
+
 
 @media only screen and (max-width: 900px) {
     .testimonial {

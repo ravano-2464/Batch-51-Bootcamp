@@ -16,7 +16,7 @@ app.get('/My-Project', blog)
 app.get('/add-My-Project', addBlogView)
 app.post('/add-My-Project', addBlog)
 
-app.get('/blog-detail/:id', blogDetail)
+app.get('/My-Project-detail/:id', blogDetail)
 app.get('/testimonial', testimonial)
 
 function home(req, res) {

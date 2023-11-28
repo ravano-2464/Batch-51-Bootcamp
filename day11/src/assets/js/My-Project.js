@@ -46,7 +46,8 @@ function submitData(event) {
         const startDateValue = startDate.value;
         const endDateValue = endDate.value;
         const descriptionValue = description.value;
-        const technologiesValue = Array.from(technologies).map((tech) => tech.value);
+        const technologiesValue = Array.from(technologies).map((tech) => tech.value); // Mengambil nilai dari checkbox yang dicentang
+
         const imageValue = image.files[0];
 
         if (imageValue) {
@@ -57,7 +58,7 @@ function submitData(event) {
             const blog = {
                 title: projectNameValue, 
                 content: descriptionValue,
-                technologies: technologiesValue,
+                technologies: technologiesValue, 
                 image: imageUrl,
                 postAt: new Date(),
                 author: "Ravano Akbar Widodo",
@@ -65,7 +66,7 @@ function submitData(event) {
                 reactJs: true,
                 nextJs: false,
                 typescript: false,
-            }
+            };
 
             dataBlog.push(blog);
             console.log("dataBlog", dataBlog)

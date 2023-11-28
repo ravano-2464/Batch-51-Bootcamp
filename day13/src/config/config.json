@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "FerariF12",
-    "database": "personal-web",
+    "database": "personal_web",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
